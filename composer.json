@@ -1,0 +1,19 @@
+{
+  "name": "b-kaxa/firefly",
+  "description": "simple framework for line bot api",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kazuki BANDAI",
+      "email": "nisigin@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Firefly\\": "src/"
+    }
+  }
+}
