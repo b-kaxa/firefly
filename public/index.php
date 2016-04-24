@@ -11,9 +11,19 @@ $receive_message = $app->getMessage();
 $entity = null;
 
 if ($receive_message->checkMessageKind('Text') && $receive_message->hasText('twitter')) {
-    $entity = $app->generateImage($receive_message);
-    $entity->setBothImageUrl('http://1.bp.blogspot.com/-nMTqgygyczs/VqtZItHn2_I/AAAAAAAA3ZY/5ZfrZPuZzbY/s800/bird_aoitori_bluebird.png');
-    $app->sendMessage($entity->getResponseData());
+    $multi_message = $app->generateMultipleMessages();
+
+    $image = $app->generateImage($receive_message);
+    $image->setBothImageUrl('http://1.bp.blogspot.com/-nMTqgygyczs/VqtZItHn2_I/AAAAAAAA3ZY/5ZfrZPuZzbY/s800/bird_aoitori_bluebird.png');
+
+    $text = $app->generateText($receive_message);
+    $text->setText('twitterだよ！！！');
+
+    $multi_message->setTo($receive_message->getFrom());
+    $multi_message->setMessage($text->getMessageForMultipleMessage());
+    $multi_message->setMessage($image->getMessageForMultipleMessage());
+
+    $app->sendMessage($multi_message->getResponseData());
     exit;
 };
 

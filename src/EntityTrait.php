@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Firefly;
 
@@ -10,12 +10,14 @@ Trait EntityTrait
     public $to;
     public $toChannel = 1383378250;
     public $eventType = '138311608800106203';
+    public $content;
 
-    public function __construct(ReceiveMessage $receive_message)
+    public function __construct(ReceiveMessage $receive_message, int $content_type)
     {
         // todo: なんとかする
         $this->to = [$receive_message->getFrom()];
         $this->content['toType'] = 1;
+        $this->content['contentType'] = $content_type;
     }
 
     public function setTo(string $to)
@@ -23,9 +25,9 @@ Trait EntityTrait
         $this->to = [$to];
     }
 
-    public function setContentType(int $content_type)
+    public function getMessageForMultipleMessage(): array
     {
-        $this->content['contentType'] = $content_type;
+        return $this->content;
     }
 
     public function getResponseData(): array

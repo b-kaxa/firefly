@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Firefly\Entity;
 
@@ -9,7 +9,6 @@ class Audio
 {
     use EntityTrait;
     public $content = [
-        'contentType' => 4,
         'contentMetadata' => [
             'AUDLEN' => '240000'
         ]

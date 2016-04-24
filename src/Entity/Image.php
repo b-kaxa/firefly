@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Firefly\Entity;
 
@@ -8,9 +8,6 @@ use Firefly\EntityTrait;
 class Image
 {
     use EntityTrait;
-    public $content = [
-        'contentType' => 2
-    ];
 
     public function setBothImageUrl(string $url)
     {
