@@ -52,6 +52,8 @@ class ReceiveMessage
                 return $this->getContentType() === 4;
             case 'Location':
                 return $this->getContentType() === 7;
+            case 'Sticker':
+                return $this->getContentType() === 8;
             default:
                 return null;
         }
