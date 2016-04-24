@@ -14,6 +14,9 @@ class ReceiveMessage
     private $contentMetadata;
     private $text;
     private $location;
+    private $params;
+    private $revision;
+    private $opType;
 
     public function __construct(array $receive_message)
     {
@@ -26,6 +29,9 @@ class ReceiveMessage
         $this->contentMetadata = $receive_message['contentMetadata'] ?? '';
         $this->text            = $receive_message['text'] ?? '';
         $this->location        = $receive_message['location'] ?? '';
+        $this->params          = $receive_message['params'] ?? '';
+        $this->revision        = $receive_message['revision'] ?? '';
+        $this->opType          = $receive_message['opType'] ?? '';
     }
 
     public function getFrom(): string
@@ -38,9 +44,13 @@ class ReceiveMessage
         return $this->contentType;
     }
 
+    public function getOpType(): int
+    {
+        return $this->opType;
+    }
+
     public function checkMessageKind(string $kind): bool
     {
-        // todo: 種類増やす
         switch ($kind) {
             case 'Text':
                 return $this->getContentType() === 1;
@@ -55,6 +65,20 @@ class ReceiveMessage
             case 'Sticker':
                 return $this->getContentType() === 8;
             default:
+                // todo: throw exception
+                return null;
+        }
+    }
+
+    public function checkOperationType(string $kind): bool
+    {
+        switch ($kind) {
+            case 'FriendAdd':
+                return $this->getOpType() === 4;
+            case 'Blocked':
+                return $this->getOpType() === 8;
+            default:
+                // todo: throw exception
                 return null;
         }
     }
