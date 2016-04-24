@@ -15,8 +15,8 @@ class Audio
         ]
     ];
 
-    public function setOriginalContentUrl($url)
+    public function setOriginalContentUrl(string $url)
     {
-        $this->content['originalContentUrl'] = (string)$url;
+        $this->content['originalContentUrl'] = $url;
     }
 }

@@ -12,13 +12,13 @@ class Video
         'contentType' => 3
     ];
 
-    public function setOriginalContentUrl($url)
+    public function setOriginalContentUrl(string $url)
     {
-        $this->content['originalContentUrl'] = (string)$url;
+        $this->content['originalContentUrl'] = $url;
     }
 
-    public function setPreviewImageUrl($url)
+    public function setPreviewImageUrl(string $url)
     {
-        $this->content['previewImageUrl'] = (string)$url;
+        $this->content['previewImageUrl'] = $url;
     }
 }
