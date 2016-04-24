@@ -15,7 +15,7 @@ class ReceiveMessage
     private $text;
     private $location;
 
-    public function __construct($receive_message)
+    public function __construct(array $receive_message)
     {
         $this->id              = $receive_message['id'] ?? '';
         $this->contentType     = $receive_message['contentType'] ?? '';
