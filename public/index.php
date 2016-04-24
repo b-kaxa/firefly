@@ -17,4 +17,19 @@ if ($receive_message->checkMessageKind('Text') && $receive_message->hasText('twi
     exit;
 };
 
+if ($receive_message->checkOperationType('FriendAdd')) {
+    $entity = $app->generateText($receive_message);
+    $entity->setTo($receive_message->getAddedOrBlockedUserMid());
+    $entity->setText('友だち追加ありがとう');
+    $app->sendMessage($entity->getResponseData());
+    exit;
+};
+
+if ($receive_message->checkOperationType('Blocked')) {
+    $entity = $app->generateText($receive_message);
+    $entity->setText('block');
+    $entity->setTo($receive_message->getAddedOrBlockedUserMid());
+    $app->sendMessage($entity->getResponseData());
+    exit;
+};
 exit(1);

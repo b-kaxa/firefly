@@ -20,7 +20,7 @@ Trait EntityTrait
 
     public function setTo(string $to)
     {
-        $this->to = $to;
+        $this->to = [$to];
     }
 
     public function setContentType(int $content_type)

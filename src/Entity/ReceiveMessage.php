@@ -21,8 +21,8 @@ class ReceiveMessage
     public function __construct(array $receive_message)
     {
         $this->id              = $receive_message['id'] ?? '';
-        $this->contentType     = $receive_message['contentType'] ?? '';
-        $this->from            = $receive_message['from'] ?? '';
+        $this->contentType     = (int)$receive_message['contentType'] ?? '';
+        $this->from            = (string)$receive_message['from'] ?? '';
         $this->createdTime     = $receive_message['createTime'] ?? '';
         $this->to              = $receive_message['to'] ?? '';
         $this->toType          = $receive_message['toType'] ?? '';
@@ -31,7 +31,7 @@ class ReceiveMessage
         $this->location        = $receive_message['location'] ?? '';
         $this->params          = $receive_message['params'] ?? '';
         $this->revision        = $receive_message['revision'] ?? '';
-        $this->opType          = $receive_message['opType'] ?? '';
+        $this->opType          = (int)$receive_message['opType'] ?? '';
     }
 
     public function getFrom(): string
@@ -47,6 +47,11 @@ class ReceiveMessage
     public function getOpType(): int
     {
         return $this->opType;
+    }
+
+    public function getAddedOrBlockedUserMid()
+    {
+        return $this->params[0];
     }
 
     public function checkMessageKind(string $kind): bool
@@ -66,7 +71,7 @@ class ReceiveMessage
                 return $this->getContentType() === 8;
             default:
                 // todo: throw exception
-                return null;
+                return false;
         }
     }
 
@@ -79,7 +84,7 @@ class ReceiveMessage
                 return $this->getOpType() === 8;
             default:
                 // todo: throw exception
-                return null;
+                return false;
         }
     }
 
