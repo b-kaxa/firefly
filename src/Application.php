@@ -82,7 +82,7 @@ class Application
         }
 
         $headers = $this->http_headers;
-        $body = $this->generateBody($body);
+        $body = json_encode($body);
         $proxy = $this->getProxyUrl();
 
         $client = new Client();
@@ -93,11 +93,6 @@ class Application
         ]);
 
         // todo: throw exception
-    }
-
-    public function generateBody(array $body)
-    {
-        return json_encode($body);
     }
 
     public function getProxyUrl(): array
