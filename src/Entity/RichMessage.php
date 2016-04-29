@@ -22,9 +22,4 @@ class RichMessage
         $this->content['contentMetadata']['DOWNLOAD_URL'] = $current_url;
         $this->content['contentMetadata']['ALT_TEXT'] = $metadata['ALT_TEXT'];
     }
-
-    public final function getResponseData(): array
-    {
-        return get_object_vars($this);
-    }
 }

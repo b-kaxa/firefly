@@ -66,4 +66,6 @@ class RichMessageDetail
     {
         return $this->detail;
     }
+
+    // todo: create setters and getters
 }

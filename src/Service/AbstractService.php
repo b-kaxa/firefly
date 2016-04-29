@@ -9,34 +9,43 @@ use Firefly\Entity\{
 
 abstract class AbstractService
 {
-    public function generateText(ReceiveMessage $receive_message): Text
+    private $receive_message;
+    private $response_data;
+
+    public function __construct(ReceiveMessage $receive_message)
     {
-        return new Text($receive_message, ReceiveMessage::CONTENT_TYPE['text']);
+        $this->receive_message = $receive_message;
+        $this->generateEntity();
     }
 
-    public function generateImage(ReceiveMessage $receive_message): Image
+    public function generateText(): Text
     {
-        return new Image($receive_message, ReceiveMessage::CONTENT_TYPE['image']);
+        return new Text($this->receive_message, ReceiveMessage::CONTENT_TYPE['text']);
     }
 
-    public function generateVideo(ReceiveMessage $receive_message): Video
+    public function generateImage(): Image
     {
-        return new Video($receive_message, ReceiveMessage::CONTENT_TYPE['video']);
+        return new Image($this->receive_message, ReceiveMessage::CONTENT_TYPE['image']);
     }
 
-    public function generateLocation(ReceiveMessage $receive_message): Location
+    public function generateVideo(): Video
     {
-        return new Location($receive_message, ReceiveMessage::CONTENT_TYPE['location']);
+        return new Video($this->receive_message, ReceiveMessage::CONTENT_TYPE['video']);
     }
 
-    public function generateSticker(ReceiveMessage $receive_message): Sticker
+    public function generateLocation(): Location
     {
-        return new Sticker($receive_message, ReceiveMessage::CONTENT_TYPE['sticker']);
+        return new Location($this->receive_message, ReceiveMessage::CONTENT_TYPE['location']);
     }
 
-    public function generateRichMessage(ReceiveMessage $receive_message): RichMessage
+    public function generateSticker(): Sticker
     {
-        return new RichMessage($receive_message, ReceiveMessage::CONTENT_TYPE['rich_message']);
+        return new Sticker($this->receive_message, ReceiveMessage::CONTENT_TYPE['sticker']);
+    }
+
+    public function generateRichMessage(): RichMessage
+    {
+        return new RichMessage($this->receive_message, ReceiveMessage::CONTENT_TYPE['rich_message']);
     }
 
     public function generateRichMessageDetail(): RichMessageDetail
@@ -47,5 +56,17 @@ abstract class AbstractService
     public function generateMultipleMessages(): MultipleMessages
     {
         return new MultipleMessages();
+    }
+
+    abstract function generateEntity();
+
+    public final function setResponseData(array $data)
+    {
+        $this->response_data = $data;
+    }
+
+    public final function getResponseData(): array
+    {
+        return $this->response_data;
     }
 }

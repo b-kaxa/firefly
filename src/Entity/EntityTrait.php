@@ -5,10 +5,10 @@ namespace Firefly\Entity;
 
 Trait EntityTrait
 {
-    public $to;
-    public $toChannel = 1383378250;
-    public $eventType = '138311608800106203';
-    public $content;
+    private $to;
+    private $toChannel = 1383378250;
+    private $eventType = '138311608800106203';
+    private $content;
 
     public function __construct(ReceiveMessage $receive_message, int $content_type)
     {
@@ -28,7 +28,7 @@ Trait EntityTrait
         return $this->content;
     }
 
-    public function getResponseData(): array
+    public final function getResponseData(): array
     {
         return get_object_vars($this);
     }

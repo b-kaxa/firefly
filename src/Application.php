@@ -50,6 +50,7 @@ class Application
             'proxy' => $proxy
         ]);
 
+        // todo: logging
         // todo: throw exception
     }
 
