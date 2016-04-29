@@ -19,7 +19,7 @@ if ($receive_message->checkMessageKind('Text') && $receive_message->hasText('twi
 
     $rich_message->setContentMetaData($metadata, $rich_message_detail);
 
-    $app->sendMessage($rich_message->getResponseData());
+//    $app->sendMessage($rich_message->getResponseData());
     exit;
 };
 

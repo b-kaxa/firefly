@@ -1,9 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Firefly;
-
-use Firefly\Entity\ReceiveMessage;
+namespace Firefly\Entity;
 
 Trait EntityTrait
 {

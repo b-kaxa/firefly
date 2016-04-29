@@ -3,8 +3,6 @@ declare(strict_types = 1);
 
 namespace Firefly\Entity;
 
-use Firefly\EntityTrait;
-
 class RichMessage
 {
     use EntityTrait;
