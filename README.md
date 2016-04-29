@@ -1,7 +1,7 @@
 firefly
 =======
 
-* simple framework (or library?, wrapper?, client?) for LINE bot API
+* simple client for LINE bot API
 * require >= PHP 7.0.0
 
 ## Setup (on heroku)
