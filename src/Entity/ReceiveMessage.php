@@ -25,7 +25,8 @@ class ReceiveMessage
         'audio' => 4,
         'location' => 7,
         'sticker' => 8,
-        'contact' => 10
+        'contact' => 10,
+        'rich_message' => 12
     ];
 
     public function __construct(array $receive_message)

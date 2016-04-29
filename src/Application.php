@@ -5,7 +5,7 @@ namespace Firefly;
 
 use GuzzleHttp\Client;
 use Firefly\Entity\{
-    Location, MultipleMessages, ReceiveMessage, Video, Text, Image, Sticker
+    Location, MultipleMessages, ReceiveMessage, RichMessage, Video, Text, Image, Sticker
 };
 
 class Application
@@ -53,6 +53,11 @@ class Application
     public function generateSticker(ReceiveMessage $receive_message): Sticker
     {
         return new Sticker($receive_message, ReceiveMessage::CONTENT_TYPE['sticker']);
+    }
+
+    public function generateRichMessage(ReceiveMessage $receive_message): RichMessage
+    {
+        return new RichMessage($receive_message, ReceiveMessage::CONTENT_TYPE['rich_message']);
     }
 
     public function generateMultipleMessages(): MultipleMessages
