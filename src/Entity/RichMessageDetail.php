@@ -8,15 +8,15 @@ class RichMessageDetail
     public $detail = [
         'canvas' => [
             'width' => 1040,
-            'height' => null,
+            'height' => 1040,
             'initialScene' => 'scene1'
         ],
         'images' => [
             'image1' => [
                 'x' => 0,
                 'y' => 0,
-                'width' => 1040,
-                'height' => null,
+                'width' => 460,
+                'height' => 460,
             ]
         ],
         'actions' => [
@@ -24,14 +24,14 @@ class RichMessageDetail
                 'type' => 'web',
                 'text' => 'text',
                 'params' => [
-                    'linkUri' => 'http://your.server.name/'
+                    'linkUri' => 'https://github.com/'
                 ]
             ],
             'showItem' => [
                 'type' => 'web',
                 'text' => 'Show item.',
                 'params' => [
-                    'linkUri' => 'http://your.server.name/items/123'
+                    'linkUri' => 'https://github.com/'
                 ]
             ]
         ],
@@ -42,30 +42,25 @@ class RichMessageDetail
                         'image' => 'image1',
                         'x' => 0,
                         'y' => 0,
-                        'w' => 1040,
-                        'h' => 1040
+                        'w' => 460,
+                        'h' => 460
                     ]
                 ],
                 'listeners' => [
                     [
                         'type' => 'touch',
-                        'params' => [0, 0, 1040, 350],
+                        'params' => [0, 0, 460, 230],
                         'action' => 'openHomepage'
                     ],
                     [
                         'type' => 'touch',
-                        'params' => [0, 350, 1040, 350],
+                        'params' => [0, 230, 460, 460],
                         'action' => 'showItem'
                     ]
                 ]
             ]
         ]
     ];
-
-    public function setDetail(string $to)
-    {
-//        $this->to = [$to];
-    }
 
     public function getDetail(): array
     {

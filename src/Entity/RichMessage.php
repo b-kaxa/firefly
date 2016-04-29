@@ -9,15 +9,19 @@ class RichMessage
 {
     use EntityTrait;
 
-    public $content = [
-        'SPEC_REV' => '1',
-        'MARKUP_JSON' => ''
-    ];
-
     public function setContentMetaData(array $metadata, RichMessageDetail $rich_message_detail)
     {
+        $this->content['contentMetadata']['SPEC_REV'] = '1';
         $this->content['contentMetadata']['MARKUP_JSON'] = json_encode($rich_message_detail->getDetail());
-        $this->content['contentMetadata']['DOWNLOAD_URL'] = $metadata['DOWNLOAD_URL'];
+
+        // fixme
+        $current_url =
+            (!empty($_SERVER["HTTPS"]) ? "http://" : "https://")
+            . $_SERVER["HTTP_HOST"]
+            . $_SERVER["REQUEST_URI"]
+            . 'images/';
+
+        $this->content['contentMetadata']['DOWNLOAD_URL'] = $current_url;
         $this->content['contentMetadata']['ALT_TEXT'] = $metadata['ALT_TEXT'];
     }
 
