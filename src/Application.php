@@ -10,9 +10,8 @@ use Firefly\Entity\{
 
 class Application
 {
-    const CONTENTS_TYPE = 'application/json; charset=UTF-8';
-
     private $event_url;
+    private $http_headers;
 
     public function __construct(array $config)
     {
@@ -21,6 +20,12 @@ class Application
         }
 
         $this->event_url = $config['event_url'];
+        $this->http_headers = [
+            'Content-Type' => 'application/json; charset=UTF-8',
+            'X-Line-ChannelID' => $config['line_channel_id'] ?? getenv('LINE_CHANNEL_ID') ?? '',
+            'X-Line-ChannelSecret' => $config['line_channel_secret'] ?? getenv('LINE_CHANNEL_SECRET') ?? '',
+            'X-Line-Trusted-User-With-ACL' => $config['line_channel_mid'] ?? getenv('LINE_CHANNEL_MID') ?? '',
+        ];
     }
 
     public function getMessage(): ReceiveMessage
@@ -76,7 +81,7 @@ class Application
             // todo: throw exception
         }
 
-        $headers = $this->getHeaders();
+        $headers = $this->http_headers;
         $body = $this->generateBody($body);
         $proxy = $this->getProxyUrl();
 
@@ -93,16 +98,6 @@ class Application
     public function generateBody(array $body)
     {
         return json_encode($body);
-    }
-
-    public function getHeaders(): array
-    {
-        return [
-            'Content-Type' => self::CONTENTS_TYPE,
-            'X-Line-ChannelID' => getenv('LINE_CHANNEL_ID'),
-            'X-Line-ChannelSecret' => getenv('LINE_CHANNEL_SECRET'),
-            'X-Line-Trusted-User-With-ACL' => getenv('LINE_CHANNEL_MID'),
-        ];
     }
 
     public function getProxyUrl(): array
