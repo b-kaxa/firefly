@@ -21,9 +21,9 @@ class Application
         $this->event_url = $config['event_url'];
         $this->http_headers = [
             'Content-Type' => 'application/json; charset=UTF-8',
-            'X-Line-ChannelID' => $config['line_channel_id'] ?? getenv('LINE_CHANNEL_ID') ?? '',
-            'X-Line-ChannelSecret' => $config['line_channel_secret'] ?? getenv('LINE_CHANNEL_SECRET') ?? '',
-            'X-Line-Trusted-User-With-ACL' => $config['line_channel_mid'] ?? getenv('LINE_CHANNEL_MID') ?? '',
+            'X-Line-ChannelID' => getenv('LINE_CHANNEL_ID') ?? $config['line_channel_id'],
+            'X-Line-ChannelSecret' => getenv('LINE_CHANNEL_SECRET') ?? $config['line_channel_secret'],
+            'X-Line-Trusted-User-With-ACL' => getenv('LINE_CHANNEL_MID') ?? $config['line_channel_mid'],
         ];
         $this->proxy_url = $config['proxy_url'];
     }
@@ -59,7 +59,7 @@ class Application
 
     public function getProxyUrl(): array
     {
-        $proxy_url = $this->proxy_url ?? getenv('PROXY_URL') ?? '';
+        $proxy_url = getenv('PROXY_URL') ?? $this->proxy_url;
         if (isset($proxy_url)) {
             return [
                 'https' => $proxy_url
