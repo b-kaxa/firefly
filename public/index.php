@@ -18,7 +18,9 @@ foreach ($receive_messages as $receive_message) {
         $entity = new TestService($receive_message);
     }
 
-    // some cases write here ...
+    // write here some cases ...
 
-    $app->sendMessage($entity->getResponseData());
+    if (!is_null($entity)) {
+        $app->sendMessage($entity->getResponseData());
+    }
 }
