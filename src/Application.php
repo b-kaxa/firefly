@@ -31,11 +31,11 @@ class Application
     public function getMessages(): array
     {
         // todo: 本能的にやばさを感じるのでなんとかする
-        $receive_message = json_decode(file_get_contents('php://input'), true);
+        $receive_data = json_decode(file_get_contents('php://input'), true);
         $receive_messages = [];
 
-        foreach ($receive_message['result'] as $number => $content) {
-            $receive_messages[] = new ReceiveMessage($content);
+        foreach ($receive_data['result'] as $receive_message) {
+            $receive_messages[] = new ReceiveMessage($receive_message['content']);
         }
 
         return $receive_messages;
