@@ -4,4 +4,5 @@ return [
     'line_channel_id' => '',
     'line_channel_secret' => '',
     'line_channel_mid' => '',
+    'proxy_url' => '',
 ];

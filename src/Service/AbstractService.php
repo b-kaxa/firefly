@@ -15,7 +15,7 @@ abstract class AbstractService
     public function __construct(ReceiveMessage $receive_message)
     {
         $this->receive_message = $receive_message;
-        $this->generateEntity();
+        $this->response_data = $this->generateEntity();
     }
 
     public function generateText(): Text
@@ -58,12 +58,7 @@ abstract class AbstractService
         return new MultipleMessages();
     }
 
-    abstract function generateEntity();
-
-    public final function setResponseData(array $data)
-    {
-        $this->response_data = $data;
-    }
+    abstract function generateEntity(): array;
 
     public final function getResponseData(): array
     {

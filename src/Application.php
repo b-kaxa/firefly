@@ -10,6 +10,7 @@ class Application
 {
     private $event_url;
     private $http_headers;
+    private $proxy_url;
 
     public function __construct(array $config)
     {
@@ -24,13 +25,20 @@ class Application
             'X-Line-ChannelSecret' => $config['line_channel_secret'] ?? getenv('LINE_CHANNEL_SECRET') ?? '',
             'X-Line-Trusted-User-With-ACL' => $config['line_channel_mid'] ?? getenv('LINE_CHANNEL_MID') ?? '',
         ];
+        $this->proxy_url = $config['proxy_url'];
     }
 
-    public function getMessage(): ReceiveMessage
+    public function getMessages(): array
     {
         // todo: 本能的にやばさを感じるのでなんとかする
         $receive_message = json_decode(file_get_contents('php://input'), true);
-        return new ReceiveMessage($receive_message['result'][0]['content']);
+        $receive_messages = [];
+
+        foreach ($receive_message['result'] as $number => $content) {
+            $receive_messages[] = new ReceiveMessage($content);
+        }
+
+        return $receive_messages;
     }
 
     public function sendMessage(array $body)
@@ -39,27 +47,22 @@ class Application
             // todo: throw exception
         }
 
-        $headers = $this->http_headers;
-        $body = json_encode($body);
-        $proxy = $this->getProxyUrl();
-
         $client = new Client();
         $client->request('post', $this->event_url, [
-            'headers' => $headers,
-            'body' => $body,
-            'proxy' => $proxy
+            'headers' => $this->http_headers,
+            'body' => json_encode($body),
+            'proxy' => $this->getProxyUrl()
         ]);
 
-        // todo: logging
-        // todo: throw exception
+        // todo: check response and logging
     }
 
     public function getProxyUrl(): array
     {
-        $proxy_url = getenv('PROXY_URL');
+        $proxy_url = $this->proxy_url ?? getenv('PROXY_URL') ?? '';
         if (isset($proxy_url)) {
             return [
-                'https' => getenv('PROXY_URL')
+                'https' => $proxy_url
             ];
         }
 

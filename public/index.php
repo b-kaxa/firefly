@@ -8,13 +8,17 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $config = require_once __DIR__ . '/../src/config.php';
 
 $app = new Firefly($config);
-$receive_message = $app->getMessage();
+$receive_messages = $app->getMessages();
 
-// example
-$entity = null;
+/* @var $receive_message \Firefly\Entity\ReceiveMessage */
+foreach ($receive_messages as $receive_message) {
+    $entity = null;
 
-if ($receive_message->checkMessageKind('Text') && $receive_message->hasText('twitter')) {
-    $entity = new TestService($receive_message);
+    if ($receive_message->checkMessageKind('Text') && $receive_message->hasText('test')) {
+        $entity = new TestService($receive_message);
+    }
+
+    // some cases write here ...
+
+    $app->sendMessage($entity->getResponseData());
 }
-
-$app->sendMessage($entity->getResponseData());
