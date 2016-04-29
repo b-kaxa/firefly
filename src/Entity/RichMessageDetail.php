@@ -15,8 +15,8 @@ class RichMessageDetail
             'image1' => [
                 'x' => 0,
                 'y' => 0,
-                'width' => 460,
-                'height' => 460,
+                'width' => 1040,
+                'height' => 1040,
             ]
         ],
         'actions' => [
@@ -42,19 +42,19 @@ class RichMessageDetail
                         'image' => 'image1',
                         'x' => 0,
                         'y' => 0,
-                        'w' => 460,
-                        'h' => 460
+                        'w' => 1040,
+                        'h' => 1040
                     ]
                 ],
                 'listeners' => [
                     [
                         'type' => 'touch',
-                        'params' => [0, 0, 460, 230],
+                        'params' => [0, 0, 1040, 520],
                         'action' => 'openHomepage'
                     ],
                     [
                         'type' => 'touch',
-                        'params' => [0, 230, 460, 460],
+                        'params' => [0, 520, 1040, 1040],
                         'action' => 'showItem'
                     ]
                 ]
