@@ -19,20 +19,8 @@ firefly
 
 ## Usage
 
-* in index.php
+* in preparation
 
-```php
-$app = new Firefly($config);
-$receive_message = $app->getMessage();
-$entity = null;
-
-if ($receive_message->checkMessageKind('Text') && $receive_message->hasText('twitter')) {
-    $entity = $app->generateImage($receive_message);
-    $entity->setBothImageUrl('[some image url]');
-    $app->sendMessage($entity->getResponseData());
-    exit;
-};
-```
 
 ## This repo is working in progress
 * please submit issue or your pull-request
